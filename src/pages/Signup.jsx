@@ -4,9 +4,27 @@ const Signup = () => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("password doesn't match");
+      return;
+    }
+
+    await fetch("http://localhost:4000/signup", {
+      method: "POST",
+      body: JSON.stringify({ mail, password }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           value={mail}
           placeholder="example@xyz.com"
