@@ -13,13 +13,19 @@ const Signup = () => {
       return;
     }
 
-    await fetch("http://localhost:4000/signup", {
-      method: "POST",
-      body: JSON.stringify({ mail, password }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const res = await fetch("http://localhost:4000/signup", {
+        method: "POST",
+        body: JSON.stringify({ mail, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+      alert("Registration Failed");
+    }
   };
 
   return (
