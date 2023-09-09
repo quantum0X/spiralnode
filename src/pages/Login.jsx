@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 
 const Login = () => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState();
   const navigate = useNavigate();
+  const { setUserInfo } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +21,10 @@ const Login = () => {
       });
       console.log(res);
       if (res.ok) {
-        navigate("/");
+        res.json().then((userInfo) => {
+          setUserInfo(userInfo);
+          navigate("/");
+        });
       } else {
         alert("wrong credintial");
       }

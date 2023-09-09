@@ -1,25 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 
 const Navbar = () => {
-  const [username, setUsername] = useState("");
+  const { setUserInfo, userInfo } = useContext(UserContext);
+
   useEffect(() => {
     fetch("http://localhost:4000/profile", {
       credentials: "include",
     }).then((res) => {
       res.json().then((userInfo) => {
-        setUsername(userInfo.mail);
+        setUserInfo(userInfo);
       });
     });
   }, []);
 
+  // logout handle
   const handleLogout = () => {
     fetch("http://localhost:4000/logout", {
       method: "POST",
       credentials: "include",
     });
-    setUsername(null);
+    setUserInfo(null);
   };
+
+  const userValidate = userInfo?.mail;
 
   return (
     <div className="flex py-6 justify-between items-centersticky top-0 z-20">
@@ -29,7 +34,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div>
-        {username ? (
+        {userValidate ? (
           <>
             <Link className="mx-2 text-lg" to="#">
               New Post
