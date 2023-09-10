@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -35,9 +36,28 @@ const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
+  const [files, setFiles] = useState("");
 
-  const handleCreatePost = (e) => {
+  const navigate = useNavigate();
+
+  // create post handle
+  const handleCreatePost = async (e) => {
     e.preventDefault();
+
+    const data = new FormData();
+    data.set("title", title);
+    data.set("summary", summary);
+    data.set("content", content);
+    data.set("file", files[0]);
+
+    const res = await fetch("http://localhost:4000/post", {
+      method: "POST",
+      body: data,
+    });
+
+    if (res.ok) {
+      navigate("/");
+    }
   };
 
   return (
@@ -54,7 +74,8 @@ const CreatePost = () => {
         value={summary}
         onChange={(e) => setSummary(e.target.value)}
       />
-      <input type="file" />
+      <input type="file" onChange={(e) => setFiles(e.target.files)} />
+
       <ReactQuill
         theme="snow"
         modules={modules}
