@@ -13,7 +13,7 @@ const Navbar = () => {
         setUserInfo(userInfo);
       });
     });
-  }, []);
+  }, [setUserInfo]);
 
   // logout handle
   const handleLogout = () => {
@@ -36,7 +36,7 @@ const Navbar = () => {
       <div>
         {userValidate ? (
           <>
-            <Link className="mx-2 text-lg" to="#">
+            <Link className="mx-2 text-lg" to="/createpost">
               New Post
             </Link>
             <button className="mx-2 text-lg" onClick={handleLogout}>
