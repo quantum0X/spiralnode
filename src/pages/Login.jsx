@@ -19,7 +19,6 @@ const Login = () => {
         },
         credentials: "include",
       });
-      console.log(res);
       if (res.ok) {
         res.json().then((userInfo) => {
           setUserInfo(userInfo);

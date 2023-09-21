@@ -10,7 +10,6 @@ const ReadPost = () => {
     fetch(`http://localhost:4000/post/${id}`).then((res) => {
       res.json().then((postInfo) => {
         setPostContent(postInfo);
-        console.log(postInfo.author?.mail);
       });
     });
   }, []);

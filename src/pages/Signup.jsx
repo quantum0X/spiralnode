@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
@@ -21,7 +23,10 @@ const Signup = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(res);
+
+      if (res.ok) {
+        navigate("/");
+      }
     } catch (err) {
       console.log(err);
       alert("Registration Failed");
