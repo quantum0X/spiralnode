@@ -1,40 +1,52 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import { useNavigate, useParams } from "react-router-dom";
 import { modules, formats } from "../assets/reactQuill";
 
-const CreatePost = () => {
+const EditPost = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState("");
 
-  const navigate = useNavigate();
+  // get the post details for modify
+  useEffect(() => {
+    fetch(`http://localhost:4000/post/${id}`).then((res) => {
+      res.json().then((postInfo) => {
+        setTitle(postInfo.title);
+        setSummary(postInfo.summary);
+        setContent(postInfo.content);
+      });
+    });
+  }, []);
 
-  // create post handle
-  const handleCreatePost = async (e) => {
+  // update post handle
+  const handleUpdatePost = async (e) => {
     e.preventDefault();
 
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
-    data.set("file", files[0]);
+    data.set("id", id);
+    if (files?.[0]) {
+      data.set("file", files?.[0]);
+    }
 
     const res = await fetch("http://localhost:4000/post", {
-      method: "POST",
+      method: "PUT",
       body: data,
       credentials: "include",
     });
 
     if (res.ok) {
-      navigate("/");
+      navigate(`/post/${id}`);
     }
   };
-
   return (
-    <form onSubmit={handleCreatePost} className="flex flex-col gap-4">
+    <form onSubmit={handleUpdatePost} className="flex flex-col gap-4">
       <input
         type="text"
         placeholder="Title"
@@ -57,10 +69,10 @@ const CreatePost = () => {
         onChange={(val) => setContent(val)}
       />
       <button className="my-2 px-2 py-1 bg-slate-900 rounded-sm text-white">
-        create post
+        Update Post
       </button>
     </form>
   );
 };
 
-export default CreatePost;
+export default EditPost;
