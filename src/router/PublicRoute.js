@@ -5,6 +5,7 @@ import Signup from "../pages/Signup";
 import CreatePost from "../pages/CreatePost";
 import Layout from "../Layout";
 import IndexPage from "../pages/IndexPage";
+import ReadPost from "../pages/ReadPost";
 
 export const route = createBrowserRouter(
     createRoutesFromElements(
@@ -13,6 +14,7 @@ export const route = createBrowserRouter(
             <Route path={"/login"} element={<Login />} />
             <Route path={"/signup"} element={<Signup />} />
             <Route path={"/createpost"} element={<CreatePost />} />
+            <Route path={"/post/:id"} element={<ReadPost />} />
         </Route>
     )
 )
