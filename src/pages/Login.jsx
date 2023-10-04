@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -35,8 +35,15 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-80vh flex flex-col justify-center items-center">
-      <form className="w-72 flex flex-col m-auto" onSubmit={handleSubmit}>
+    <div className="w-full h-90vh flex flex-col justify-center items-center">
+      <Link to="/">
+        <img
+          src="/logo120.png"
+          alt="spiralnode"
+          className="h-28 w-28 mx-auto mt-20 mb-10"
+        />
+      </Link>
+      <form className="w-72 flex flex-col  m-auto" onSubmit={handleSubmit}>
         <div className="py-2 px-10 my-3 bg-main-dark text-main-text-light border border-3 text-center border-gray-500 rounded-md hover:bg-main-hover cursor-pointer">
           <FontAwesomeIcon icon={faGoogle} className="mx-2" />
           Sign in with Google
@@ -57,12 +64,15 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button
-          className="bg-main-dark w-fit px-5 py-1 mx-auto text-lg text-main-text-light rounded-md font-medium hover:bg-main-hover"
+          className="bg-main-dark w-fit my-2 px-5 py-1 mx-auto text-lg text-main-text-light rounded-md font-medium hover:bg-main-hover"
           type="submit"
         >
           Log in
         </button>
       </form>
+      <div className="font-semibold mb-4 text-lg text-main-light">
+        Made with ❤️ Bharat
+      </div>
     </div>
   );
 };

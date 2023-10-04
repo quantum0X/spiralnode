@@ -34,11 +34,17 @@ const Navbar = () => {
 
   return (
     <div className="flex py-6 justify-between items-centersticky top-0 z-20">
-      <div>
-        <Link className="font-semibold text-2xl" href="/">
+      {paramUrl.pathname === "/" ? (
+        <Link
+          className="flex justify-center items-center font-semibold text-2xl"
+          href="/"
+        >
+          <img src="/logo30.png" alt="spiralnode" className="h-9 mr-2" />
           Spiralnode
         </Link>
-      </div>
+      ) : (
+        <div></div>
+      )}
       <div>
         {userValidate ? (
           <>
@@ -53,17 +59,17 @@ const Navbar = () => {
           <>
             {paramUrl.pathname === "/signup" || paramUrl.pathname === "/" ? (
               <Link
-                className="bg-main-dark w-fit px-5 py-1 mx-auto text-lg text-main-text-light rounded-md font-medium hover:bg-main-hover"
+                className="bg-main-dark w-fit px-5 py-2 mx-auto text-lg text-main-text-light rounded-md font-medium hover:bg-main-hover"
                 to="/login"
               >
-                Login
+                Log in
               </Link>
             ) : (
               <Link
-                className="bg-main-dark w-fit px-5 py-1 mx-auto text-lg text-main-text-light rounded-md font-medium hover:bg-main-hover"
+                className="bg-main-dark w-fit px-5 py-2 mx-auto text-lg text-main-text-light rounded-md font-medium hover:bg-main-hover"
                 to="/signup"
               >
-                Signup
+                Sign up
               </Link>
             )}
           </>
