@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 const Login = () => {
   const [mail, setMail] = useState("");
@@ -33,9 +35,10 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-80vh bg-slate-200 flex flex-col justify-center items-center">
+    <div className="w-full h-80vh flex flex-col justify-center items-center">
       <form className="w-72 flex flex-col m-auto" onSubmit={handleSubmit}>
         <div className="py-2 px-10 my-3 bg-main-dark text-main-text-light border border-3 text-center border-gray-500 rounded-md hover:bg-main-hover cursor-pointer">
+          <FontAwesomeIcon icon={faGoogle} className="mx-2" />
           Sign in with Google
         </div>
         <hr className="h-[2px] w-11/12 my-4 bg-main-light mx-auto" />
@@ -50,7 +53,7 @@ const Login = () => {
           className=" py-2 px-10 my-2 border border-3 border-main-light  rounded-md"
           value={password}
           type="password"
-          placeholder="********"
+          placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
         <button

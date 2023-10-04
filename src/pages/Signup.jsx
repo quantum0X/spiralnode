@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faG } from "@fortawesome/free-solid-svg-icons";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -34,9 +37,10 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-full h-80vh bg-slate-200 flex flex-col justify-center items-center">
+    <div className="w-full h-80vh  flex flex-col justify-center items-center">
       <form className="w-72 flex flex-col m-auto" onSubmit={handleSubmit}>
         <div className="py-2 px-10 my-3 bg-main-dark text-main-text-light border border-3 text-center border-gray-500 rounded-md hover:bg-main-hover cursor-pointer">
+          <FontAwesomeIcon icon={faGoogle} className="mx-2" />
           Sign in with Google
         </div>
         <hr className="h-[2px] w-11/12 my-4 bg-main-light mx-auto" />
