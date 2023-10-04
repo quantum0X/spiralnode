@@ -36,7 +36,7 @@ const Navbar = () => {
     <div className="flex py-6 justify-between items-centersticky top-0 z-20">
       <div>
         <Link className="font-semibold text-2xl" href="/">
-          MyBlog
+          Spiralnode
         </Link>
       </div>
       <div>
