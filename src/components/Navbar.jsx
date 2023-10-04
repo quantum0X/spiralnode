@@ -1,9 +1,15 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 
 const Navbar = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
+  console.log(process.env.API_KEY);
+  const url = process.env.API_KEY + "/post";
+  console.log(url);
+
+  let paramUrl = useLocation();
+  console.log(paramUrl);
 
   useEffect(() => {
     fetch("http://localhost:4000/profile", {
@@ -45,12 +51,21 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link className="mx-2 px-4 py-1 text-lg outline" to="/login">
-              Login
-            </Link>
-            <Link className="mx-2 text-lg px-4 py-1 bg-gray-500" to="/signup">
-              Signup
-            </Link>
+            {paramUrl.pathname === "/signup" || paramUrl.pathname === "/" ? (
+              <Link
+                className="bg-main-dark w-fit px-5 py-1 mx-auto text-lg text-main-text-light rounded-md font-medium hover:bg-main-hover"
+                to="/login"
+              >
+                Login
+              </Link>
+            ) : (
+              <Link
+                className="bg-main-dark w-fit px-5 py-1 mx-auto text-lg text-main-text-light rounded-md font-medium hover:bg-main-hover"
+                to="/signup"
+              >
+                Signup
+              </Link>
+            )}
           </>
         )}
       </div>

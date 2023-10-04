@@ -7,7 +7,10 @@ const Post = ({ _id, title, summary, cover, createdAt, author }) => {
     <div className="grid sm:grid-cols-2 grid-cols-1 gap-5 my-5 ">
       <div className="h-60 overflow-hidden">
         <Link to={`/post/${_id}`}>
-          <img alt="img" src={"http://localhost:4000/" + cover} />
+          <img
+            alt="img"
+            src={"http://localhost:4000/uploads/" + cover.split("\\").pop()}
+          />
         </Link>
       </div>
       <div className=" mx-4">

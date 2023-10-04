@@ -7,12 +7,14 @@ const ReadPost = () => {
   const { userInfo } = useContext(UserContext);
   const [postContent, setPostContent] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:4000/post/${id}`).then((res) => {
+    fetch(process.env.API_KEY + id).then((res) => {
       res.json().then((postInfo) => {
         setPostContent(postInfo);
       });
     });
-  }, []);
+  }, [id]);
+
+  console.log(postContent.cover);
 
   return (
     <div>
@@ -28,7 +30,9 @@ const ReadPost = () => {
       )}
 
       <img
-        src={`http://localhost:4000/${postContent.cover}`}
+        src={`http://localhost:4000/uploads/${postContent.cover
+          ?.split("\\")
+          .pop()}`}
         alt=""
         srcset=""
       />
