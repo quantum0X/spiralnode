@@ -7,7 +7,7 @@ const ReadPost = () => {
   const { userInfo } = useContext(UserContext);
   const [postContent, setPostContent] = useState({});
   useEffect(() => {
-    fetch(process.env.API_KEY + id).then((res) => {
+    fetch("http://localhost:4000/" + id).then((res) => {
       res.json().then((postInfo) => {
         setPostContent(postInfo);
       });

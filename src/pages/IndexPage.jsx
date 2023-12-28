@@ -4,7 +4,7 @@ import Post from "../components/Post";
 const IndexPage = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:4000/post").then((res) => {
+    fetch(`${process.env.REACT_APP_API_KEY_POST}`).then((res) => {
       res.json().then((UserPosts) => {
         setPosts(UserPosts);
       });
